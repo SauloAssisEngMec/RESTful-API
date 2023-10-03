@@ -1,6 +1,13 @@
 const fs = require("fs");
 const Tour = require("./../models/tourModel");
 
+exports.aliasTopTours = async (req, res, next) => {
+  req.query.limit = "5";
+  req.query.sort = "-ratingsAverage,price";
+  req.query.fields = "name,price,ratingsAverage";
+  next();
+};
+
 exports.getAllTours = async (req, res) => {
   // http://localhost:3000/api/v1/tours?duration[gte]=5 router to use in insominia for lt|gt|lte|gte
   try {
