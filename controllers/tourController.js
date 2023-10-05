@@ -180,3 +180,42 @@ exports.deleteTour = async (req, res) => {
   //   message: "This deleteTour handler route is not yet defined",
   // });
 };
+
+exports.getTourStats = async (req, res) => {
+  try {
+    const stats = await Tour.aggregate([
+      {
+        $match: {
+          ratingsAverage: { $gte: 4.5 },
+        },
+      },
+      {
+        $group: {
+          _id: "$duration", // usando null vc ver pra geral, mas usando difficulty, por exemplo, vc ver para os niveis de dificuldade existes cada estatitiscas
+          numTours: { $sum: 1 },
+          sumRatings: { $sum: "$ratingsQuantity" },
+          avgRating: { $avg: "$ratingsAverage" },
+          avgPrice: { $avg: "$price" },
+          minPrice: { $min: "$price" },
+          maxPrice: { $max: "$price" },
+        },
+      },
+      {
+        $match: { _id: { $ne: 10 } }, // aqui diz que não pode com id = diccifulty igual a dez
+      },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+
+      data: {
+        stats,
+      },
+    });
+  } catch (e) {
+    res.status(400).json({
+      status: "fail",
+      message: e.message,
+    });
+  }
+};

@@ -25,6 +25,7 @@ app.use(express.json()); // permite guardar dados no req da requisição POST
 // app.patch("/api/v1/tours/:id");
 // app.delete("/api/v1/tours/:id");
 // app.use("/api/v1/", tourRouter);
+
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
 
