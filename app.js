@@ -29,6 +29,12 @@ app.use(express.json()); // permite guardar dados no req da requisição POST
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
 
+app.all("*", (req, res, next) => {
+  res.status(404).json({
+    status: "fail",
+    message: `Cannot find (${req.originalUrl})on this Server!!!`,
+  });
+});
 // START SERVER
 
 module.exports = app;

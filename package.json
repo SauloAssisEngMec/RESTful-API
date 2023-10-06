@@ -4,18 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js"
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "carlo": "^0.9.46",
+    "chokidar": "^3.5.3",
+    "debug": "^4.3.4",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "isbinaryfile": "^5.0.0",
+    "mime": "^3.0.0",
     "mongoose": "^7.5.3",
     "morgan": "^1.10.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "open": "^9.1.0",
+    "puppeteer": "^21.3.7",
+    "update-notifier": "^6.0.2",
+    "ws": "^8.14.2"
   }
 }
