@@ -1,6 +1,7 @@
 const Tour = require("./../models/tourModel");
 const APIFeatures = require("./../utils/apiFeatures");
 const catchAsync = require("./../utils/catchAsync");
+const AppError = require("./../utils/appError");
 
 exports.aliasTopTours = async (req, res, next) => {
   req.query.limit = "5";
@@ -94,11 +95,18 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
 });
 
 exports.getTour = catchAsync(async (req, res, next) => {
-  const id = await req.params.id;
-  console.log(id);
-
   //const tour = await Tour.findOne({ _id: id });
-  const tour = await Tour.findById(id);
+  const tour = await Tour.findById(req.params.id);
+
+  if (!tour) {
+    return next(
+      new AppError(
+        `Cannot find Tour with (${req.params.id}) on this Server!!!`,
+        404
+      )
+    );
+  }
+
   res.status(200).json({
     status: "success",
 
@@ -135,6 +143,16 @@ exports.updateTour = catchAsync(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
+
+  if (!tour) {
+    return next(
+      new AppError(
+        `Cannot find Tour with (${req.params.id}) on this Server!!!`,
+        404
+      )
+    );
+  }
+
   res.status(201).json({
     status: "success",
     data: {
@@ -145,13 +163,22 @@ exports.updateTour = catchAsync(async (req, res, next) => {
 
 exports.deleteTour = catchAsync(async (req, res, next) => {
   const deleteTour = await Tour.findByIdAndDelete(req.params.id);
+
+  if (!deleteTour) {
+    return next(
+      new AppError(
+        `Cannot find Tour with (${req.params.id}) on this Server!!!`,
+        404
+      )
+    );
+  }
+
   res.status(201).json({
     status: "success",
     data: {
       tour: deleteTour,
     },
   });
-
   // res.status(500).json({
   //   status: "error",
   //   message: "This deleteTour handler route is not yet defined",
