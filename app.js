@@ -16,7 +16,11 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json()); // permite guardar dados no req da requisição POST
 
-//  ROUTE HANDLERS
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  console.log(req.headers);
+  next();
+});
 
 // User Source
 

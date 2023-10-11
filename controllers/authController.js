@@ -60,3 +60,29 @@ exports.login = catchAsync(async (req, res, next) => {
     token2,
   });
 });
+
+exports.protect = catchAsync(async (req, res, next) => {
+  // i get token (send jwt using http header with request) and check if exist
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  console.log(token);
+  // ii validate/ verification token
+  if (!token) {
+    return next(
+      new AppError(
+        "You arent login, please login is necessary to log in!!!",
+        401
+      )
+    );
+  }
+  // iii check if user still exist
+
+  // iv check if user changed password after the token(jwt) was issued
+
+  next();
+});
