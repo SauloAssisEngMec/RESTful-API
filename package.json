@@ -23,6 +23,7 @@
     "mime": "^3.0.0",
     "mongoose": "^7.5.3",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.9.7",
     "nodemon": "^3.0.1",
     "open": "^9.1.0",
     "puppeteer": "^21.3.7",

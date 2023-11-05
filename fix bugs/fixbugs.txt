@@ -1,1 +1,3 @@
 use node --inspect-brk server.js
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjRiYTBmMmMzZWM0ZWI3ZGRhYjYzYSIsImlhdCI6MTY5NjkwNjU0NCwiZXhwIjoxNzA0NjgyNTQ0fQ.kxh5tYTQgQxIakIAthH9MIMPz5f55syzm2kMBSVe_Ps
